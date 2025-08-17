@@ -1,0 +1,16 @@
+{
+  "compatibility_date": "2025-04-01",
+  "main": "src/index.ts",
+  "name": "audiolab-api",
+  "upload_source_maps": true,
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "audiolab-db",
+      "database_id": "38953e53-7c3a-4820-bf8c-8172d69260b7"
+    }
+  ]
+}
