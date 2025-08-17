@@ -1,58 +1,49 @@
-# OpenAPI Template
-
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/chanfana-openapi-template)
-
-![OpenAPI Template Preview](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/91076b39-1f5b-46f6-7f14-536a6f183000/public)
-
-<!-- dash-content-start -->
-
-This is a Cloudflare Worker with OpenAPI 3.1 Auto Generation and Validation using [chanfana](https://github.com/cloudflare/chanfana) and [Hono](https://github.com/honojs/hono).
-
-This is an example project made to be used as a quick start into building OpenAPI compliant Workers that generates the
-`openapi.json` schema automatically from code and validates the incoming request to the defined parameters or request body.
-
-This template includes various endpoints, a D1 database, and integration tests using [Vitest](https://vitest.dev/) as examples. In endpoints, you will find [chanfana D1 AutoEndpoints](https://chanfana.com/endpoints/auto/d1) and a [normal endpoint](https://chanfana.com/endpoints/defining-endpoints) to serve as examples for your projects.
-
-Besides being able to see the OpenAPI schema (openapi.json) in the browser, you can also extract the schema locally no hassle by running this command `npm run schema`.
-
-<!-- dash-content-end -->
-
-> [!IMPORTANT]
-> When using C3 to create this project, select "no" when it asks if you want to deploy. You need to follow this project's [setup steps](https://github.com/cloudflare/templates/tree/main/openapi-template#setup-steps) before deploying.
+# audiolab-api
 
 ## Getting Started
 
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
+This project requires a D1 database and an R2 bucket. You can use the provided initialization script to set them up.
 
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/openapi-template
-```
+1. **Initialize Cloudflare Resources**
 
-A live public deployment of this template is available at [https://openapi-template.templates.workers.dev](https://openapi-template.templates.workers.dev)
+   Run the following script to create the D1 database and the R2 bucket:
 
-## Setup Steps
+   ```bash
+   ./init_resources.sh
+   ```
 
-1. Install the project dependencies with a package manager of your choice:
+   This will also print the `database_id` for your D1 database. Make sure to update your `wrangler.jsonc` with this ID.
+
+2. **Install dependencies**
+
    ```bash
    npm install
    ```
-2. Create a [D1 database](https://developers.cloudflare.com/d1/get-started/) with the name "openapi-template-db":
+
+3. **Run locally**
+
+   The `dev` command will automatically apply the necessary D1 migrations.
+
    ```bash
-   npx wrangler d1 create openapi-template-db
+   npm run dev
    ```
-   ...and update the `database_id` field in `wrangler.json` with the new database ID.
-3. Run the following db migration to initialize the database (notice the `migrations` directory in this project):
-   ```bash
-   npx wrangler d1 migrations apply DB --remote
-   ```
-4. Deploy the project!
+
+4. **Deploy**
+
    ```bash
    npx wrangler deploy
    ```
-5. Monitor your worker
-   ```bash
-   npx wrangler tail
-   ```
+
+## Cloudflare Services
+
+This worker uses the following Cloudflare services:
+
+- **D1 Database:** For storing script metadata.
+- **R2 Bucket:** For storing the generated script files.
+- **Workers AI:** For generating the scripts using an LLM.
+
+Make sure the bindings for these services in `wrangler.jsonc` are correct.
+
 
 ## Testing
 

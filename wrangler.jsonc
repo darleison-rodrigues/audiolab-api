@@ -12,5 +12,14 @@
       "database_name": "audiolab-db",
       "database_id": "38953e53-7c3a-4820-bf8c-8172d69260b7"
     }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "r2_buckets": [
+    {
+      "binding": "R2_BUCKET",
+      "bucket_name": "audiolab-scripts"
+    }
   ]
 }

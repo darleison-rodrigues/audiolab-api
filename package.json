@@ -20,7 +20,7 @@
   "scripts": {
     "cf-typegen": "wrangler types",
     "deploy": "wrangler deploy",
-    "dev": "pnpm seedLocalDb && wrangler dev",
+    "dev": "npm run seedLocalDb && wrangler dev",
     "predeploy": "wrangler d1 migrations apply DB --remote",
     "seedLocalDb": "wrangler d1 migrations apply DB --local",
     "schema": "npx chanfana",
@@ -29,6 +29,7 @@
   "dependencies": {
     "chanfana": "2.8.1",
     "hono": "4.8.2",
+    "unpdf": "^1.1.0",
     "zod": "3.25.67"
   },
   "devDependencies": {

@@ -1,8 +1,7 @@
 import { ApiException, fromHono } from "chanfana";
 import { Hono } from "hono";
-import { tasksRouter } from "./endpoints/tasks/router";
+import { scriptsRouter } from "./endpoints/scripts/router";
 import { ContentfulStatusCode } from "hono/utils/http-status";
-import { DummyEndpoint } from "./endpoints/dummyEndpoint";
 
 // Start a Hono app
 const app = new Hono<{ Bindings: Env }>();
@@ -33,18 +32,19 @@ const openapi = fromHono(app, {
   docs_url: "/",
   schema: {
     info: {
-      title: "My Awesome API",
+      title: "audiolab-api",
       version: "2.0.0",
-      description: "This is the documentation for my awesome API.",
+      description: "API for generating audio scripts from articles.",
     },
   },
 });
 
-// Register Tasks Sub router
-openapi.route("/tasks", tasksRouter);
 
-// Register other endpoints
-openapi.post("/dummy/:slug", DummyEndpoint);
+
+// Register Scripts Sub router
+openapi.route("/scripts", scriptsRouter);
+
+
 
 // Export the Hono app
 export default app;
